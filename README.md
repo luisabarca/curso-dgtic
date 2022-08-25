@@ -1,1 +1,6 @@
-# Curso colaborativo de Git
+# Curso de colaboración con Git
+
+- Git
+- Fork
+- Push
+- Push
