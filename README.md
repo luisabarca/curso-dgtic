@@ -1,6 +1,13 @@
 # Curso de colaboración con Git
 
+
 - Git
 - Fork
 - Push
 - Push
+
+
+# CLI
+
+- push
+- pull
