@@ -3,8 +3,8 @@ const URL_BASE = "https://pokeapi.co/api/v2/pokemon/";
 try {
   fetch(URL_BASE)
     .then((response) => {
-      const responseJson = response.json();
-      return responseJson;
+      const respuestaJSON = response.json();
+      return respuestaJSON;
     })
     .then((data) => {
       const pokemons = data.results;
@@ -24,7 +24,7 @@ try {
   console.error(error);
 }
 
-const detail = (url) => {
+const detalle = (url) => {
   try {
     fetch(url)
       .then((response) => response.json())
