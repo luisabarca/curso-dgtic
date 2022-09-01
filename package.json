@@ -1,0 +1,22 @@
+{
+  "name": "curso-dgtic",
+  "version": "1.0.0",
+  "description": "Curso DGTIC",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luisabarca/curso-dgtic.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luisabarca/curso-dgtic/issues"
+  },
+  "homepage": "https://github.com/luisabarca/curso-dgtic#readme",
+  "dependencies": {
+    "axios": "^0.27.2"
+  }
+}
