@@ -13,13 +13,24 @@ export type Ubicacion = {
   long: number;
 };
 
-export type Lugar = Ubicacion & {
+type NombreLugar = {
   nombre: string;
 };
 
-export type IdUsuario = string | number;
+export type Lugar = Ubicacion & NombreLugar & {
+  favorito?: boolean;
+};
+
+export type IdUsuario = string | number | null | undefined;
 
 export enum TipoUsuario {
   ADMIN = "Administrador",
   EDITOR = "Editor",
+}
+
+export enum Direccion {
+  ARRIBA = 10,
+  ABAJO = 20,
+  IZQUIERDA = 100,
+  DERECHA
 }
