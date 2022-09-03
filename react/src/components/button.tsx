@@ -1,12 +1,14 @@
 // importa con alias
-import { styled as styledStitches } from "@stitches/react";
+import { styled } from "@stitches/react";
 
-export const Button = styledStitches("button", {
+export const Button = styled("button", {
+  // Móvil
   backgroundColor: "black",
   color: "white",
   padding: "6px 15px",
   margin: "12px",
   border: "none",
+  
   "&:hover": {
     backgroundColor: "#333",
   },

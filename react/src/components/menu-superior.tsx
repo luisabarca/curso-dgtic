@@ -29,7 +29,7 @@ const MenuOption = styled("li", {
   listStyle: "none",
   margin: "0",
   padding: "4px 12px",
-})
+});
 
 export const MenuSuperior: React.FC<IMenuSuperiorProps> = ({ titulo, elementos }) => {
   return (
