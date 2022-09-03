@@ -5,7 +5,11 @@ const ModalWrapper = styled("div", {
   border: "1px solid #bbb",
   boxShadow: "3px 3px 2px #ccc", // Sombra
   margin: "15px",
-})
+});
+
+const TitleWrapper = styled("p", {
+
+});
 
 export const ModalActions = () => {
   return (
@@ -22,7 +26,7 @@ export const ModalActions = () => {
 
 export const Modal = ({ title }) => (
   <ModalWrapper>
-    <p>{title ?? ""}</p>
+    <TitleWrapper>{title ?? ""}</TitleWrapper>
 
     <ModalActions />
   </ModalWrapper>
