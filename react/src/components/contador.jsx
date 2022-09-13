@@ -9,22 +9,6 @@ export const Contador = ({ valorInicial }) => {
     setValor((valorActual) => valorActual + 1);
   };
 
-  // Se ejecuta en cada renderizado
-  useEffect(() => {
-    console.log("desde useEffect");
-  });
-
-  useEffect(() => {
-    // Cargamos datos del servidor
-    // if (datos.length < 1) {
-    //   fetch(`${process.env.REACT_APP_API_ENDPOINT}/usuarios`).then((data) => {
-    //     setDatos(data);
-    //   });
-
-    //   obtenerUsuarios();
-    // }
-  }, []);
-
   useEffect(() => {
     if (valor >= process.env.REACT_APP_NUMERO_GANADOR) {
       setEsGanador(true);
