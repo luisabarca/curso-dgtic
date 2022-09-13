@@ -1,11 +1,13 @@
 import { styled } from "@stitches/react";
-import { Contador } from "./components/contador";
 import { MenuSuperior } from "./components/menu-superior";
-import { Saludo } from "./components/saludos";
 import { TipoUsuario } from "./types";
-import { Modal } from "./components/modal";
 import { guardarUsuario } from "./utils/guardarUsuario";
-import { Button } from "./components/button";
+import { Route, Routes } from "react-router-dom";
+import { InicioPage } from "./pages/Inicio";
+import { NoticiasPage } from "./pages/Noticias";
+import { UsuariosPage } from "./pages/Usuarios";
+import { DetalleNoticiaPage } from "./pages/DetalleNoticia";
+import { DetalleUsuarioPage } from "./pages/DetalleUsuario";
 
 const AppWrapperStyled = styled("div", {
   textAlign: "center",
@@ -13,12 +15,24 @@ const AppWrapperStyled = styled("div", {
 
 function App() {
   const edad: number = 18;
-  const opciones = ["Inicio", "Usuario", "Noticias"];
-  // const opcionesAdmin = [...opciones, "Configuración", "Iniciar sesión"];
+  const opciones = [
+    {
+      title: "Inicio",
+      href: "/",
+    },
+    {
+      title: "Usuario",
+      href: "/usuarios",
+    },
+    {
+      title: "Noticias",
+      href: "/noticias",
+    },
+  ];
 
   // Obtiene la config en JSON y lo transforma en objeto
   const config = JSON.parse(process.env.REACT_APP_CONFIG_JSON ?? "");
-  console.log('config', config);
+  console.log("config", config);
 
   guardarUsuario(1, TipoUsuario.EDITOR, "Luis", edad, {
     nombre: "Casa",
@@ -29,29 +43,14 @@ function App() {
   return (
     <AppWrapperStyled>
       <MenuSuperior elementos={opciones} />
-      <Saludo
-        mostrarHola={true}
-        isAdmin
-        cargo="General"
-        nombre="Vicente Guerrero"
-      />
 
-      <p>
-        conexion a la base:<br />
-        {process.env.REACT_APP_DB_CONEXION}
-      </p>
-
-      <Contador valorInicial={1} />
-
-      <Button size="small" primary>
-        Boton con Stitches
-      </Button>
-
-      <Modal title="Seguro que deseas eliminar el archivo?" />
-
-      <div>
-        <a href={process.env.REACT_APP_BASE_URL}>Ir a GRO</a>
-      </div>
+      <Routes>
+        <Route path="/" element={<InicioPage />} />
+        <Route path="/noticias" element={<NoticiasPage />} />
+        <Route path="/noticias/:noticiaId" element={<DetalleNoticiaPage />} />
+        <Route path="/usuarios/:usuarioId" element={<DetalleUsuarioPage />} />
+        <Route path="/usuarios" element={<UsuariosPage />} />
+      </Routes>
     </AppWrapperStyled>
   );
 }
