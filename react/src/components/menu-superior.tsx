@@ -1,7 +1,13 @@
 import { styled } from "@stitches/react";
+import { Link } from "react-router-dom";
+
+type LinkItem = {
+  title: string;
+  href: string;
+};
 
 interface IMenuSuperiorProps {
-  elementos: string[];
+  elementos: LinkItem[];
   titulo?: string;
 }
 
@@ -22,7 +28,7 @@ const MenuWrapper = styled("div", {
 const Menu = styled("ul", {
   margin: "0",
   padding: "0",
-  display: "flex"
+  display: "flex",
 });
 
 const MenuOption = styled("li", {
@@ -31,16 +37,20 @@ const MenuOption = styled("li", {
   padding: "4px 12px",
 });
 
-export const MenuSuperior: React.FC<IMenuSuperiorProps> = ({ titulo, elementos }) => {
+export const MenuSuperior: React.FC<IMenuSuperiorProps> = ({
+  titulo,
+  elementos,
+}) => {
   return (
     <MenuWrapper>
       <Menu>
         <MenuOption>{titulo ?? ""}</MenuOption>
 
         {elementos.map((element) => (
-          <MenuOption>{element}</MenuOption>
+          <MenuOption>
+            <Link to={element.href}>{element.title}</Link>
+          </MenuOption>
         ))}
-
       </Menu>
     </MenuWrapper>
   );
