@@ -1,4 +1,5 @@
 import { styled } from "@stitches/react";
+import { useAppContext } from "../context/app-context";
 import { Button } from "./button";
 
 const ModalWrapper = styled("div", {
@@ -12,13 +13,15 @@ const TitleWrapper = styled("p", {
 });
 
 export const ModalActions = () => {
+  const { esSpanish } = useAppContext();
+
   return (
     <>
       <Button size="large" secundario>
-        Canelar
+        {esSpanish() ? "Canelar" : "Cancel"}
       </Button>
       <Button size="large" primary>
-        Continuar
+        {esSpanish() ? "Continuar" : "Continue"}
       </Button>
     </>
   );
