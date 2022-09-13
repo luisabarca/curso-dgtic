@@ -1,3 +1,14 @@
+export type Usuario = {
+  id: number;
+  name: string;
+  email: string;
+  // [key: string]: any;
+  address?: {
+    street: string;
+    suite: string;
+    city: string;
+  };
+};
 
 export interface IUbicacion {
   lat: number;
