@@ -1,5 +1,7 @@
 import { styled } from "@stitches/react";
 import { Link } from "react-router-dom";
+import { useAppContext } from "../context/app-context";
+import { Button } from "./button";
 
 type LinkItem = {
   title: string;
@@ -7,7 +9,6 @@ type LinkItem = {
 };
 
 interface IMenuSuperiorProps {
-  elementos: LinkItem[];
   titulo?: string;
 }
 
@@ -37,10 +38,35 @@ const MenuOption = styled("li", {
   padding: "4px 12px",
 });
 
-export const MenuSuperior: React.FC<IMenuSuperiorProps> = ({
-  titulo,
-  elementos,
-}) => {
+const opciones = [
+  {
+    title: "Inicio",
+    href: "/",
+  },
+  {
+    title: "Usuario",
+    href: "/usuarios",
+  },
+  {
+    title: "Noticias",
+    href: "/noticias",
+  },
+];
+
+const opcionesAdmin = [
+  {
+    title: "Dashboard",
+    href: "/dash",
+  },
+];
+
+export const MenuSuperior: React.FC<IMenuSuperiorProps> = ({ titulo }) => {
+  // Accedemos al contexto
+  const { toggleIdioma, esSpanish, sesion, setSesion } = useAppContext();
+
+  // Sin sesion solo mostrar opciones normales
+  const elementos = !sesion ? opciones : [...opciones, ...opcionesAdmin];
+
   return (
     <MenuWrapper>
       <Menu>
@@ -51,6 +77,20 @@ export const MenuSuperior: React.FC<IMenuSuperiorProps> = ({
             <Link to={element.href}>{element.title}</Link>
           </MenuOption>
         ))}
+
+        {sesion ? (
+          <MenuOption
+            onClick={() => {
+              setSesion(null);
+            }}
+          >
+            Salir
+          </MenuOption>
+        ) : null}
+
+        <MenuOption onClick={toggleIdioma}>
+          {esSpanish() ? "English" : "Español"}
+        </MenuOption>
       </Menu>
     </MenuWrapper>
   );
