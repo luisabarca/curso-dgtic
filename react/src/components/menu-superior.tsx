@@ -19,7 +19,7 @@ const MenuWrapper = styled("div", {
   flexDirection: "row",
   alignItems: "center",
   justifyContent: "center",
-  fontSize: "calc(10px + 2vmin)",
+  fontSize: "1.3rem",
   color: "white",
   margin: "0",
   padding: "0",
@@ -35,6 +35,7 @@ const MenuOption = styled("li", {
   listStyle: "none",
   margin: "0",
   padding: "4px 12px",
+  cursor: "pointer", // Muestra la manita al botón de lenguaje que no es enlace
 });
 
 const opciones: LinkItem[] = [
@@ -66,6 +67,20 @@ export const MenuSuperior: React.FC<IMenuSuperiorProps> = ({ titulo }) => {
   // Sin sesion solo mostrar opciones normales
   const elementos = !sesion ? opciones : [...opciones, ...opcionesAdmin];
 
+  const handleBotonSesion = () => {
+    if (!sesion) {
+      // Esto puede ir en el context como login() / logout
+      // para no exponer detalles de implementación
+      setSesion({
+        id: 1,
+        usuario: "luis",
+      });
+    } else {
+      // Esto puede ir en el context como logout()
+      setSesion(null);
+    }
+  };
+
   return (
     <MenuWrapper>
       <Menu>
@@ -77,18 +92,14 @@ export const MenuSuperior: React.FC<IMenuSuperiorProps> = ({ titulo }) => {
           </MenuOption>
         ))}
 
-        {sesion ? (
-          <MenuOption
-            onClick={() => {
-              setSesion(null);
-            }}
-          >
-            Salir
-          </MenuOption>
-        ) : null}
-
         <MenuOption onClick={toggleIdioma}>
           {esSpanish() ? "English" : "Español"}
+        </MenuOption>
+
+        <MenuOption
+          onClick={handleBotonSesion}
+        >
+          {sesion ? "Salir" : "Iniciar sesión"}
         </MenuOption>
       </Menu>
     </MenuWrapper>
