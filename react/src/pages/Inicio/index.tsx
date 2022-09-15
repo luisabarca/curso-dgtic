@@ -50,3 +50,5 @@ export const InicioPage = () => {
     </>
   );
 };
+
+export default InicioPage;

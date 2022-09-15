@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Usuario } from "../types";
 
-export const DetalleUsuarioPage = () => {
+export default function DetalleUsuarioPage() {
   const params = useParams();
 
   const [usuario, setUsuario] = useState<Usuario | null>(null);

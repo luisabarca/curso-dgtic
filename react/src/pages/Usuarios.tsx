@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "../components/button";
 import { guardarUsuario, useObtenerUsuarios } from "../services/usuarios";
 
-export const UsuariosPage = () => {
+export default function UsuariosPage() {
   const [formData, setFormData] = useState("");
   const [isError, setIsError] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -15,6 +15,8 @@ export const UsuariosPage = () => {
     guardarUsuario(formData).then(() => {
         setIsSaving(false);
         reload();
+    }).catch(() => {
+      setIsError(true);
     });
   };
 

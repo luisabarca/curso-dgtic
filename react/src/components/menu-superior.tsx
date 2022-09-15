@@ -1,7 +1,6 @@
 import { styled } from "@stitches/react";
 import { Link } from "react-router-dom";
 import { useAppContext } from "../context/app-context";
-import { Button } from "./button";
 
 type LinkItem = {
   title: string;
@@ -38,7 +37,7 @@ const MenuOption = styled("li", {
   padding: "4px 12px",
 });
 
-const opciones = [
+const opciones: LinkItem[] = [
   {
     title: "Inicio",
     href: "/",
@@ -53,7 +52,7 @@ const opciones = [
   },
 ];
 
-const opcionesAdmin = [
+const opcionesAdmin: LinkItem[] = [
   {
     title: "Dashboard",
     href: "/dash",
@@ -95,3 +94,5 @@ export const MenuSuperior: React.FC<IMenuSuperiorProps> = ({ titulo }) => {
     </MenuWrapper>
   );
 };
+
+export default MenuSuperior;
