@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { Usuario } from "../types";
+import type { Usuario } from "../types";
 
 export const obtenerUsuarios = async () => {
   try {
-    const response = await fetch("http://localhost:3001/usuarios");
+    // Esto puede ir en el .env REACT_APP_API_USERS_ENDPOINT
+    // process.env.REACT_APP_API_USERS_ENDPOINT
+    const response = await fetch("https://jsonplaceholder.typicode.com/users");
     return await response.json();
   } catch (error) {
     return null;
@@ -45,6 +47,7 @@ export const useObtenerUsuarios = () => {
 
 export const guardarUsuario = async (formData: string) => {
   try {
+    // Necesario tenerlo local con JSON faker
     await fetch("http://localhost:3001/usuarios", {
       method: "POST",
       headers: {
