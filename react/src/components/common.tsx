@@ -1,4 +1,5 @@
 import { styled } from "@stitches/react";
+import React from "react";
 
 export const Titulo = styled("h3", {
   textAlign: "left",
@@ -12,6 +13,6 @@ export const Content = styled("p", {
   color: "#555",
 });
 
-export const Container = ({ children }) => {
+export const Container = ({ children }: { children: React.ReactNode }) => {
   return <div className="container mx-auto">{children}</div>;
 };

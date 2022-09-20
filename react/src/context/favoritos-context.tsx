@@ -1,4 +1,4 @@
-import { createContext, Dispatch, SetStateAction, useContext, useState } from "react";
+import React, { createContext, Dispatch, SetStateAction, useContext, useState } from "react";
 
 type FavoritosContextType = {
     favoritos: number[];
@@ -13,7 +13,7 @@ type FavoritosContextType = {
 const FavoritosContext = createContext<FavoritosContextType | null>(null);
 
 export const useFavoritosContext = () => {
-    const context = useContext<FavoritosContextType>(FavoritosContext);
+    const context = useContext(FavoritosContext);
 
     if (!context) {
         throw new Error("No existe el contexto de favoritos");
@@ -22,7 +22,7 @@ export const useFavoritosContext = () => {
     return context;
 }
 
-export const FavoritosProvider = ({ children }) => {
+export const FavoritosProvider = ({ children }: { children: React.ReactNode }) => {
     const [favoritos, setFavoritos] = useState<number[]>([]);
 
     const agregarFavorito = (id: number) => {
