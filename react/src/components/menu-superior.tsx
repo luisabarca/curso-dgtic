@@ -1,6 +1,7 @@
 import { styled } from "@stitches/react";
 import { Link } from "react-router-dom";
 import { useAppContext } from "../context/app-context";
+import { useFavoritosContext } from "../context/favoritos-context";
 
 type LinkItem = {
   title: string;
@@ -51,6 +52,10 @@ const opciones: LinkItem[] = [
     title: "Noticias",
     href: "/noticias",
   },
+  {
+    title: "Favoritos",
+    href: "/favoritos",
+  },
 ];
 
 const opcionesAdmin: LinkItem[] = [
@@ -63,6 +68,8 @@ const opcionesAdmin: LinkItem[] = [
 export const MenuSuperior: React.FC<IMenuSuperiorProps> = ({ titulo }) => {
   // Accedemos al contexto
   const { toggleIdioma, esSpanish, sesion, setSesion } = useAppContext();
+
+  const { count } = useFavoritosContext();
 
   // Sin sesion solo mostrar opciones normales
   const elementos = !sesion ? opciones : [...opciones, ...opcionesAdmin];
@@ -81,6 +88,19 @@ export const MenuSuperior: React.FC<IMenuSuperiorProps> = ({ titulo }) => {
     }
   };
 
+  const renderCount = (url: string) => {
+    // solo el link a favoritos tiene su contador
+    if (url !== "/favoritos") return null;
+    // mostrar solo si es mayor a 1
+    if (count < 1) return null;
+
+    return (
+      <span className="inline-flex items-center rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800">
+        {count}
+      </span>
+    );
+  };
+
   return (
     <MenuWrapper>
       <Menu>
@@ -88,7 +108,9 @@ export const MenuSuperior: React.FC<IMenuSuperiorProps> = ({ titulo }) => {
 
         {elementos.map((element) => (
           <MenuOption>
-            <Link to={element.href}>{element.title}</Link>
+            <Link to={element.href}>
+              {element.title} {renderCount(element.href)}
+            </Link>
           </MenuOption>
         ))}
 
@@ -96,9 +118,7 @@ export const MenuSuperior: React.FC<IMenuSuperiorProps> = ({ titulo }) => {
           {esSpanish() ? "English" : "Español"}
         </MenuOption>
 
-        <MenuOption
-          onClick={handleBotonSesion}
-        >
+        <MenuOption onClick={handleBotonSesion}>
           {sesion ? "Salir" : "Iniciar sesión"}
         </MenuOption>
       </Menu>
