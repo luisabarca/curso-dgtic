@@ -39,9 +39,10 @@ export const FavoritosProvider = ({ children }: { children: React.ReactNode }) =
     };
 
     const eliminarFavorito = (id: number) => {
-        delete favoritos[id];
+        // Encuentra el elemento en el arreglo
+        const newFavs = favoritos.filter((item: number) => item !== id);
 
-        setFavoritos(favoritos);
+        setFavoritos(newFavs);
     };
 
     const isFavorito = (id: number) => {
