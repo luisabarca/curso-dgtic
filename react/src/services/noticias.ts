@@ -9,7 +9,7 @@ type NoticiaType = {
 
 export const getNoticias = async () => {
     try {
-        const response = await fetch(process.env.REACT_APP_API_NOTICIAS_ENDPOINT);
+        const response = await fetch(process.env.REACT_APP_API_NOTICIAS_ENDPOINT ?? "");
         const datos = await response.json();
 
         return datos as NoticiaType[];
@@ -36,7 +36,9 @@ export const useGetNoticias = () => {
     return items;
 }
 
-export default {
+const noticiasService = {
     get: getNoticias,
     post: postNoticias,
 };
+
+export default noticiasService;

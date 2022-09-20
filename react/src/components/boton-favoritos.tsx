@@ -1,6 +1,12 @@
 import { Button } from "./button";
 
-export const BotonFavoritos = ({ onClick, isFavorito, id }) => (
+type BotonFavoritosProps = {
+    onClick: (id: number) => void;
+    isFavorito: (id: number) => boolean;
+    id: number;
+}
+
+export const BotonFavoritos = ({ onClick, isFavorito, id }: BotonFavoritosProps) => (
   <Button
     primary
     onClick={() => {
