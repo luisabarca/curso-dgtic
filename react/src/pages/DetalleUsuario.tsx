@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { useParams } from "react-router-dom";
 import { Usuario } from "../types";
 
@@ -20,12 +21,15 @@ export default function DetalleUsuarioPage() {
       });
   }, [params]);
 
-  if (!usuario) return <h1>Loading...</h1>
+  if (!usuario) return <h1>Loading...</h1>;
 
   return (
     <div>
-        <h1>Detalle de Usuario</h1>
-        <p>{usuario.name}</p>
+      <Helmet>
+        <title>Detalle de usuarios</title>
+      </Helmet>
+      <h1>Detalle de Usuario</h1>
+      <p>{usuario.name}</p>
     </div>
   );
-};
+}
