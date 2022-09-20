@@ -4,11 +4,13 @@ import { styled } from "@stitches/react";
 import { Route, Routes } from "react-router-dom";
 import { createClient, Provider } from "urql";
 import { AppContextProvider } from "./context/app-context";
+import { FavoritosProvider } from "./context/favoritos-context";
+import FavoritosPage from "./pages/Favoritos";
 
 // Named exports
 const MenuSuperior = React.lazy(() => import("./components/menu-superior"));
 const InicioPage = React.lazy(() => import("./pages/Inicio"));
-const NoticiasPage = React.lazy(() => import("./pages/Noticias"));
+const NoticiasPage = React.lazy(() => import("./pages/noticias"));
 const UsuariosPage = React.lazy(() => import("./pages/Usuarios"));
 const DetalleNoticiaPage = React.lazy(() => import("./pages/DetalleNoticia"));
 const DetalleUsuarioPage = React.lazy(() => import("./pages/DetalleUsuario"));
@@ -23,7 +25,7 @@ const SkeletonMenu = styled("div", {
   width: "100%",
 });
 
-// La URL podría venir en una variable de ambiente 
+// La URL podría venir en una variable de ambiente
 // REACT_APP_API_GRAPHQL_ENDPOINT
 const client = createClient({
   url: "http://localhost:9002/graphql",
@@ -37,25 +39,28 @@ function App() {
     <AppWrapperStyled>
       <Provider value={client}>
         <AppContextProvider>
-          <Suspense fallback={<SkeletonMenu />}>
-            <MenuSuperior />
-          </Suspense>
+          <FavoritosProvider>
+            <Suspense fallback={<SkeletonMenu />}>
+              <MenuSuperior />
+            </Suspense>
 
-          <Suspense fallback={<div>Cargando...</div>}>
-            <Routes>
-              <Route path="/" element={<InicioPage />} />
-              <Route path="/noticias" element={<NoticiasPage />} />
-              <Route
-                path="/noticias/:noticiaId"
-                element={<DetalleNoticiaPage />}
-              />
-              <Route
-                path="/usuarios/:usuarioId"
-                element={<DetalleUsuarioPage />}
-              />
-              <Route path="/usuarios" element={<UsuariosPage />} />
-            </Routes>
-          </Suspense>
+            <Suspense fallback={<div>Cargando...</div>}>
+              <Routes>
+                <Route path="/" element={<InicioPage />} />
+                <Route path="/noticias" element={<NoticiasPage />} />
+                <Route
+                  path="/noticias/:noticiaId"
+                  element={<DetalleNoticiaPage />}
+                />
+                <Route
+                  path="/usuarios/:usuarioId"
+                  element={<DetalleUsuarioPage />}
+                />
+                <Route path="/usuarios" element={<UsuariosPage />} />
+                <Route path="/favoritos" element={<FavoritosPage />} />
+              </Routes>
+            </Suspense>
+          </FavoritosProvider>
         </AppContextProvider>
       </Provider>
     </AppWrapperStyled>
