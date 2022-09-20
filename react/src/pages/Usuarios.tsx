@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { Button } from "../components/button";
 import { guardarUsuario, useObtenerUsuarios } from "../services/usuarios";
@@ -22,6 +23,9 @@ export default function UsuariosPage() {
 
   return (
     <div>
+      <Helmet>
+        <title>Usuarios</title>
+      </Helmet>
       <h1 className="text-3xl">Usuarios</h1>
       {isError && <p>Ocurrio un error</p>}
       <input
