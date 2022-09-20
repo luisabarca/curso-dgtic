@@ -1,7 +1,7 @@
 // Default exports
 import React, { Suspense } from "react";
 import { styled } from "@stitches/react";
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { createClient, Provider } from "urql";
 import { AppContextProvider } from "./context/app-context";
 import { FavoritosProvider } from "./context/favoritos-context";
@@ -36,34 +36,36 @@ function App() {
   // const config = JSON.parse(process.env.REACT_APP_CONFIG_JSON ?? "");
 
   return (
-    <AppWrapperStyled>
-      <Provider value={client}>
-        <AppContextProvider>
-          <FavoritosProvider>
-            <Suspense fallback={<SkeletonMenu />}>
-              <MenuSuperior />
-            </Suspense>
+    <BrowserRouter>
+      <AppWrapperStyled>
+        <Provider value={client}>
+          <AppContextProvider>
+            <FavoritosProvider>
+              <Suspense fallback={<SkeletonMenu />}>
+                <MenuSuperior />
+              </Suspense>
 
-            <Suspense fallback={<div>Cargando...</div>}>
-              <Routes>
-                <Route path="/" element={<InicioPage />} />
-                <Route path="/noticias" element={<NoticiasPage />} />
-                <Route
-                  path="/noticias/:noticiaId"
-                  element={<DetalleNoticiaPage />}
-                />
-                <Route
-                  path="/usuarios/:usuarioId"
-                  element={<DetalleUsuarioPage />}
-                />
-                <Route path="/usuarios" element={<UsuariosPage />} />
-                <Route path="/favoritos" element={<FavoritosPage />} />
-              </Routes>
-            </Suspense>
-          </FavoritosProvider>
-        </AppContextProvider>
-      </Provider>
-    </AppWrapperStyled>
+              <Suspense fallback={<div>Cargando...</div>}>
+                <Routes>
+                  <Route path="/" element={<InicioPage />} />
+                  <Route path="/noticias" element={<NoticiasPage />} />
+                  <Route
+                    path="/noticias/:noticiaId"
+                    element={<DetalleNoticiaPage />}
+                  />
+                  <Route
+                    path="/usuarios/:usuarioId"
+                    element={<DetalleUsuarioPage />}
+                  />
+                  <Route path="/usuarios" element={<UsuariosPage />} />
+                  <Route path="/favoritos" element={<FavoritosPage />} />
+                </Routes>
+              </Suspense>
+            </FavoritosProvider>
+          </AppContextProvider>
+        </Provider>
+      </AppWrapperStyled>
+    </BrowserRouter>
   );
 }
 
