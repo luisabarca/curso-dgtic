@@ -21,7 +21,9 @@ const Home: NextPage = () => {
           <a>Ir a noticias</a>
         </Link>{" "}
         
-          <a href="/noticias/policiacas">Ir a noticias policiacas</a>
+        <Link href="/noticias/sefina">
+          <a>Ir a noticias de SEFINA</a>
+        </Link>
         
         <p className={styles.description}>
           Get started by editing{" "}
