@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  frontend:
+    container_name: frontend-dev
+    image: curso-react
+    volumes:
+      - ./src:/app/src
+    ports:
+      - "80:3000"
+    env_file: .env
+    environment:
+      - DB_HOST=db:3306
+      - BACKEND_API=backend:3000/api
+
+  db:
+    container_name: db-mysql-dev
+    image: beercan1989/arm-mysql
+    volumes:
+      - ./data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=miclave
+      - MYSQL_USER=luisabarca
+    ports:
+      - 3306:3306
+
+  backend:
+    image: node:16-alpine
+    container_name: backend-dev
+    ports:
+      - "3000:3000"
