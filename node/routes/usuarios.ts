@@ -2,12 +2,18 @@ import { Request, Response } from "express";
 import { createUser, deleteUser, getUsuario, getUsuarios, update } from "../services/usuarios";
 
 export function createUserRoutes(app) {
+    /**
+     * Obtiene todos los usuarios
+     */
     app.get("/usuarios", async (req, res) => {
         const usuarios = await getUsuarios();
     
         res.send(usuarios);
     });
     
+    /**
+     * Obtener 1 usuario
+     */
     app.get("/usuarios/:id", async (req, res) => {
         const usuario = await getUsuario(parseInt(req.params.id));
     
@@ -26,10 +32,8 @@ export function createUserRoutes(app) {
         });
     });
     
-    app.put("/usuarios/:id", async (req, res) => {
-        await update({
-            ...req.body,
-        }, req.params.id);
+    app.put("/usuarios/:id", async (req: Request, res: Response) => {
+        await update(req.body, parseInt(req.params.id));
     
         res.send("OK");
     });
