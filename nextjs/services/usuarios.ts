@@ -12,8 +12,28 @@ export const getUsuarios = async () => {
     return resp.data;
 }
 
+/**
+ * Crea
+ * @param datos 
+ */
 export const createUsuario = async (datos: {}) => {
     const resp = await axiosInstance.post("/usuarios", datos);
+}
+
+/**
+ * Actualiza
+ * @param datos 
+ */
+export const updateUsuario = async (id: number, datos: {}) => {
+    return await axiosInstance.put(`/usuarios/${id}`, datos);
+}
+
+/**
+ * Actualiza
+ * @param datos 
+ */
+export const deleteUsuario = async (id: number) => {
+    return await axiosInstance.delete(`/usuarios/${id}`);
 }
 
 export const useUsuariosQuery = () => {
